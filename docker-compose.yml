@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TIME_INTERVAL=60
+      - REQUEST_COUNT=50
+    build: .
+    ports:
+     - "5000:5000"
+    volumes:
+     - .:/data
+  redis:
+    image: "redis:alpine"
