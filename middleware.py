@@ -29,6 +29,7 @@ class RedisMiddleWare:
         if existing_count < REQUEST_COUNT:
             pickled_data = json.dumps({'url': url, 'time': max_time})
             redis_con.zadd(client_id, {pickled_data: max_time})
+            redis_con.execute_command('EXPIRE ' + client_id + ' 60')
             return False
         return True
 

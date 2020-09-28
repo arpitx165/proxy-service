@@ -51,7 +51,7 @@ def rate_limiting():
     if request_body:
         st = RedisMiddleWare.check_limit(request_body)
         if st:
-            return jsonify({'requestBlocked': True}), 429
+            return jsonify({'requestBlocked': True, 'message': 'number of requests got exceeded the limit'}), 429
 
 
 @app.route('/triggerRequest', methods=['POST'])
@@ -66,9 +66,6 @@ def trigger_request():
         params = request_body.get('params')
         http_method = request_body.get('httpRequestType')
         body = request_body.get('requestBody') if request_body.get('requestBody') else {}
-        is_stringify = request_body.get('requestBodyStringify')
-        if is_stringify:
-            body = json.dumps(body)
         res = request_method_mapping[http_method.lower()](url, headers=headers, params=params, data=body)
         data = None
         if hasattr(res, 'data'):
@@ -77,7 +74,8 @@ def trigger_request():
             data = res.text
         return jsonify({'status': 'success', 'data': {'reqStatus': res.status_code, 'reqData': data, 'url': url}}), 200
     except Exception as e:
-        return jsonify({'status': 'Fail', 'error': get_message(e)}), 500
+        return jsonify({'status': 'Fail', 'message': 'Failed while processing the request due to internal server issue',
+                        'error': get_message(e)}), 500
 
 
 @app.route('/health')

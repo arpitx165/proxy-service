@@ -14,8 +14,8 @@ def patch(url, headers=None, params={}, timeout=5, data={}):
 
 
 def put(url, headers=None, params={}, timeout=5, data={}):
-    return requests.patch(url, headers=headers, params=params, data=data, timeout=(timeout, timeout))
+    return requests.put(url, headers=headers, params=params, data=data, timeout=(timeout, timeout))
 
 
 def delete(url, headers=None, params={}, timeout=5, data={}):
-    return requests.patch(url, headers=headers, params=params, data=data, timeout=(timeout, timeout))
+    return requests.delete(url, headers=headers, params=params, data=data, timeout=(timeout, timeout))

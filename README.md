@@ -72,15 +72,12 @@ Sample response :
 	"headers": { "Content-type": "application/json; charset=UTF-8" },
 	"httpRequestType": "GET",
 	"requestBody": { },
-	"requestBodyStringify": false
 }
 ```
 
 **Note** 
 
 * **Params** are request parameter that will be url enCoded.
-
-* **requestBodyStringify** purpose of this is if request body needs to be stringify than send it as **true** else it will be **false** 
 
 **Response Body** :
 
@@ -113,3 +110,8 @@ Sample response :
 * Once redis container is exited, will lose the data as volume path for redis is not mentioned so its will not work as persistent storage.
 
 
+## Testing :
+
+* In order to run test make sure containers are up and running :
+
+>  python test.py
